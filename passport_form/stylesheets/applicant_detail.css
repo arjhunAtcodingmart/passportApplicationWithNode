@@ -1,0 +1,25 @@
+.first_name{
+    width:100%;
+}
+.surname{
+    width:100%;
+}
+.other_names_1{
+    margin-left: 30px;
+}
+.other_names_2{
+    margin-left: 18px;
+}
+.name_changed_1{
+    margin-left: 95px;
+}
+.name_changed_2{
+    margin-left: 18px;
+}
+.dob{
+    border: none;
+    border: 1px solid rgb(83, 82, 82);
+    border-radius: 4px;
+    margin-left: 160px;
+    margin-bottom: 6px;
+}

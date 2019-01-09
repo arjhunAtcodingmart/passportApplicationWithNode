@@ -1,0 +1,12 @@
+.first_refer_address, .second_refer_address {
+    width: 100%;
+    margin-bottom: 6px;
+}
+.first_refer_mobile_number, .second_refer_mobile_number{
+    margin-left: 50px;
+    width: 20%;
+}
+.first_refer_telephone_number, .second_refer_telephone_number{
+    margin-left: 50px;
+    margin-bottom: 6px;
+}

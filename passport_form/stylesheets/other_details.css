@@ -1,0 +1,38 @@
+.charged_yes{
+    margin-left: 19px;
+}
+.charged_no, .offence_no, .denied_no, .revoked_no, .political_asylum_no, .ec_no{
+    margin-left: 18px;
+}
+.offence_head{
+    margin-right:365px;
+}
+.denied_yes{
+    margin-left: 51.3%;
+}
+.revoked_yes{
+    margin-left: 47.5%;
+}
+.political_asylum_yes{
+    margin-left: 285px;
+}
+.ec_yes{
+    margin-left: 161px;
+    margin-bottom: 6px;
+}
+.self_declaration{
+    border: 1px solid black;
+    margin-bottom: 6px;
+}
+.policies,.agree{
+    margin-left: 4px;
+    justify-content: center
+}
+.place{
+    width:40%;
+    margin-bottom: 6px;
+}
+.date{
+    border: 2px solid rgb(102, 102, 102);
+    border-radius: 6px;
+}

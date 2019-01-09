@@ -1,0 +1,69 @@
+.city{
+    width:50%;
+    margin-left: 8%;
+    margin-bottom: 4px;
+}
+.country{
+    margin-left: 10px;
+    margin-bottom: 4px;
+}
+.state{
+    margin-left: 30px;
+}
+.district_head{
+    margin-left: 10%;
+}
+.gender{
+    width: 15%;
+}
+.marital_status_head{
+    margin-left: 20px;
+}
+.marital_status{
+    width:20%;
+}
+.citizenship_head{
+    margin-left: 20px;
+}
+.citizenship{
+    width:20%;
+}
+.pan_id{
+    margin-top: 4px;
+    width:30%
+}
+.voter_id_head{
+    margin-left: 70px;
+}
+.voter_id{
+    width:30%;
+}
+.employment{
+    margin-top: 6px;
+    width:80%
+}
+.gov_servant{
+    margin-top:6px;
+    margin-bottom: 6px;
+    width:6%
+}
+.edu_qualification{
+    width: 30%;
+    margin-bottom: 6px;
+    margin-left: 8px;
+}
+.non_ecr_head{
+    margin-left: 52px;
+}
+.non_ecr{
+    width:10%;
+}
+.mark{
+    width:75%;
+    margin-bottom: 6px;
+}
+.aadhaar_number{
+    margin-left: 80px;
+    margin-bottom:6px;
+    width:30%;
+}

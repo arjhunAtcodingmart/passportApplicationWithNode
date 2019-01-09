@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+
+    <script src="appController.js"></script>
+    <link rel="stylesheet" href="stylesheets/main.css">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+
+</head>
+
+<body ng-app="app" class="container" ng-cloak></body>
+<div ng-controller="appController" class="col-sm-12 col-md-12 col-lg-12">
+    <h3>
+        <center><b>PASSPORT APPLICATION FORM</b></center>
+    </h3>
+    <h4>
+        <center><b>Government of India, Ministry of External Affirs</b></center>
+    </h4>
+    <div>
+        <span class="gov_emblem">
+            <img class="govEmblem" src="./gov.png" alt="Indian_Emblem">
+        </span>
+        <span>
+            <p class="head_info">Please read the Passport Instruction Booklet carefully before filling the form.
+                Furnishing of incorrect information/
+                suppression of information would lead to rejection of application and would attract penal provisions as
+                prescribed
+                under the Passports Act, 1967. Please produce your original documents at the time of submission of the
+                form. All fields
+                marked with (*) are mandatory to fill.</p>
+        </span>
+    </div>
+    <form name="myForm" ng-submit="validate(myForm.$invalid)" novalidate>
+        <div class="Each_head">
+            <h6><b>Service Required</b></h6>
+        </div>
+        <p><b>Applying for *</b>
+            <select ng-model="data.services.select_type" class="type_input" name="typeInput" ng-options="x for x in applyFor"
+                required></select>
+            <span style="color:red" ng-show="myForm.$submitted && myForm.typeInput.$invalid">
+                <span ng-show="myForm.typeInput.$error.required">please select the applying type</span><br>
+            </span>
+        </p>
+        <div>
+            <b>Type of Application * </b>
+            <input type="radio" class="type_of_application_1" ng-model="data.services.type_of_application" name="type_of_application"
+                value="normal" required>Normal
+            <input type="radio" class="type_of_application_2" ng-model="data.services.type_of_application" name="type_of_application"
+                value="Tatkaal" required>Tatkaal
+            <span style="color:red" ng-show="myForm.$submitted">
+                <span ng-show="myForm.type_of_application.$error.required">select the type of application</span><br>
+            </span>
+        </div>
+        <div>
+            <b>Type of Passport Booklet *</b>
+            <input type="radio" class="type_of_passport_1" ng-model="data.services.type_of_passport" name="type_of_passport"
+                value="36_Pages" required>36 Pages
+            <input type="radio" class="type_of_passport_2" ng-model="data.services.type_of_passport" name="type_of_passport"
+                value="60_Pages" required>60 Pages
+            <span style="color:red" ng-show="myForm.$submitted">
+                <span ng-show="myForm.type_of_passport.$error.required">select the type of Passport Booklet</span><br>
+            </span>
+        </div>
+        <div>
+            <b>Validity Required (For minors between 15 and 18)</b>
+            <input type="radio" class="validation_1" ng-model="data.services.validity" name="validation" value="10_years">10
+            years
+            <input type="radio" class="validation_2" ng-model="data.services.validity" name="validation" value="up_to_age_18">Up
+            to age 18
+            <input type="radio" class="validation_3" ng-model="data.services.validity" name="validation" value="not_applicable">Not
+            Applicable
+        </div>
+
+        <div class="Each_head">
+            <h6><b>Applicant Detail</b></h6>
+        </div>
+        <b>Applicant's Given Name (Given Name means First Name followed by middle Name (if any)) *</b>
+        <input class="first_name" name="firstName" type="text" ng-model="data.applicant_details.first_name" required>
+        <span style="color:red" ng-show="myForm.$submitted && myForm.firstName.$invalid">
+            <span ng-show="myForm.firstName.$error.required">Firstname is required</span><br>
+        </span>
+
+        <b>Surname</b>
+        <input class="surname" type="text" ng-model="data.applicant_details.surname">
+        <div>
+            <b>Are you known by any other names(aliases)? *</b>
+            <input type="radio" class="other_names_1" name="otherName" ng-model="data.applicant_details.other_names"
+                required value="yes">Yes
+            <input type="radio" class="other_names_2" name="otherName" ng-model="data.applicant_details.other_names"
+                required value="no">No
+            <span style="color:red" ng-show="myForm.$submitted && myForm.otherName.$invalid">
+                <span ng-show="myForm.otherName.$error.required">please select this field</span><br>
+            </span>
+        </div>
+        <div>
+            <b>Have you ever changed your name ? *</b>
+            <input type="radio" class="name_changed_1" ng-model="data.applicant_details.name_changed" name="nameChanged"
+                required value="yes">Yes
+            <input type="radio" class="name_changed_2" ng-model="data.applicant_details.name_changed" name="nameChanged"
+                required value="no">No
+            <span style="color:red" ng-show="myForm.$submitted">
+                <span ng-show="myForm.nameChanged.$error.required">please select this field</span><br>
+            </span>
+        </div>
+        <div>
+            <b>Date of Birth (DD/MM/YYYY) *</b>
+            <input class="dob" type="date" name="date_of_birth" ng-model="data.applicant_details.date_of_birth " required>
+            <span style="color:red" ng-show="myForm.$submitted && myForm.date_of_birth.$invalid">
+                <span ng-show="myForm.date_of_birth.$error.required">please enter date_of_birth</span><br>
+            </span>
+            <div>
+
+
+                <div class="Each_head">
+                    <h6><b>Place Of Birth</b></h6>
+                </div>
+                <div>
+                    <b>Village or Town or City *</b>
+                    <input class="city" type="text" name="city" ng-model="data.applicant_details.city">
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.city.$invalid">
+                        <span ng-show="myForm.city.$error.required">please enter your Town or City name</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Country (If abroad)* </b>
+                    <select ng-model="data.applicant_details.select_country" class="country" name="country" ng-required="!data.applicant_details.select_state">
+                        <option ng-repeat="country in countries">{{country}}</option>
+                    </select>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.country.$invalid">
+                        <span ng-show="myForm.country.$error.required">please select your country</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>State (If in India)*</b>
+                    <select ng-model="data.applicant_details.select_state" name="state" class="state" ng-required="!data.applicant_details.select_country"
+                        ng-options="x for x in state" ng-change="districtData(data.applicant_details.select_state)"></select>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.state.$invalid">
+                        <span ng-show="myForm.state.$error.required">please select your state</span><br>
+                    </span>
+                    <b class="district_head">District (If in India)*</b>
+                    <select ng-model="data.applicant_details.select_district" name="district" class="district" ng-options="x for x in district"
+                        ng-required="data.applicant_details.select_state"></select>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.district.$invalid">
+                        <span ng-show="myForm.district.$error.required">please select your district</span><br>
+                    </span>
+                </div>
+                <p>If born before 15/08/1947 in a place now in Pakistan or Bangladesh, select "Undivided India".</p>
+                <div>
+                    <b>Gender* </b>
+                    <select ng-model="data.applicant_details.select_gender" name="gender" class="gender" ng-options="x for x in gender"
+                        required></select>
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.gender.$error.required">please select your gender</span><br>
+                    </span>
+                    <b class="marital_status_head">Marital Status *</b>
+                    <select ng-model="data.applicant_details.select_marital" name="marital_status" class="marital_status"
+                        ng-options="x for x in marital_status" required></select>
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.marital_status.$error.required">please select your gender</span><br>
+                    </span>
+                    <b class="citizenship_head">Citizenship of India by *</b>
+                    <select ng-model="data.applicant_details.select_citizenship" name="citizenship" class="citizenship"
+                        ng-options="x for x in citizenship" required></select>
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.citizenship.$error.required">please select your gender</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>PAN (If available)</b>
+                    <input class="pan_id" name="pan" type="text" ng-model="data.applicant_details.pan_id" ng-maxlength="10">
+                    <p style="color:red" ng-if="!myForm.pan.$valid">Invalid pan Id</p>
+                    <b class="voter_id_head">Voter ID (If available)</b>
+                    <input class="voter_id" name="voter" type="text" ng-model="data.applicant_details.voter_id"
+                        ng-maxlength="11">
+                    <p style="color:red" ng-if="!myForm.voter.$valid">Invalid voter Id</p>
+                </div>
+                <div>
+                    <b>Employment Type *</b>
+                    <select ng-model="data.applicant_details.select_employment" name="employment" class="employment"
+                        ng-options="x for x in employment_type" required></select>
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.employment.$error.required">please select your Employment Type</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Is either of your parent (in case of minor)/ spouse, a government servant? *</b>
+                    <select ng-model="data.applicant_details.select_gov_servant" name="govServant" class="gov_servant"
+                        ng-options="x for x in gov_servant"></select>
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.govServant.$error.required">please select this Field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Educational Qualification *</b>
+                    <select ng-model="data.applicant_details.select_qualification" name="qualification" class="edu_qualification"
+                        ng-options="x for x in edu_qualification" required></select>
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.qualification.$error.required">please select your Educational
+                            Qualification</span><br>
+                    </span>
+                    <b class="non_ecr_head">Are you eligible for Non-ECR category? *</b>
+                    <select ng-model="data.applicant_details.select_non_e_c_r" name="nonEcr" class="non_ecr" ng-options="x for x in non_ecr"
+                        required></select>
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.nonEcr.$error.required">please select this Field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Visible Distinguishing Mark</b>
+                    <input class="mark" type="text" ng-model="data.applicant_details.mark">
+                </div>
+                <div>
+                    <b>Aadhaar Number</b>
+                    <input class="aadhaar_number" type="text" name="aadhaar" ng-model="data.applicant_details.aadhaar_number"
+                        ng-maxlength="12">
+                    <span style="color:red" ng-if="!myForm.aadhaar.$valid">Invalid aadhaar number</span>
+                </div>
+
+
+                <div class="Each_head">
+                    <h6><b>Family Details (You have to provide atleast one Father/Mother/Legal Guardian details.)</b></h6>
+                </div>
+                <div>
+                    <b>Father's Given Name (Given Name means First Name followed by Middle Name (If any)) </b>
+                    <input class="father_name" type="text" name="fatherName" ng-model="data.family_details.father_name"
+                        ng-required="!data.family_details.guardian_name && !data.family_details.mother_name">
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.fatherName.$error.required">please enter atleast one name</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Surname</b>
+                    <input class="father_surname" type="text" ng-model="data.family_details.father_surname">
+                </div>
+                <div>
+                    <b>Legal Guardian's Given Name (if applicable)</b>
+                    <input class="guardian_name" type="text" ng-model="data.family_details.guardian_name" ng-required="!data.family_details.father_name && !data.family_details.mother_name">
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.fatherName.$error.required">please enter atleast one name</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Surname</b>
+                    <input class="guardian_surname" type="text" ng-model="data.family_details.guardian_surname">
+                </div>
+                <div>
+                    <b>Mother's Given Name (Given Name means First Name followed by Middle Name (If any)) </b>
+                    <input class="mother_name" type="text" ng-model="data.family_details.mother_name" ng-required="!data.family_details.guardian_name && !data.family_details.father_name">
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.fatherName.$error.required">please enter atleast one name</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Surname</b>
+                    <input class="mother_surname" type="text" ng-model="data.family_details.mother_surname">
+                </div>
+
+                <div class="Each_head">
+                    <h6><b>Present Residential Address details (where applicant presently resides)</b></h6>
+                </div>
+                <div>
+                    <b>Is your present address out of India? *</b>
+                    <input type="radio" class="address_in_out_yes" ng-model="data.address_details.address_in_out_country" name="address_in_out_country"
+                        value="yes" required>Yes
+                    <input type="radio" class="address_in_out_no" ng-model="data.address_details.address_in_out_country" name="address_in_out_country"
+                        value="no" required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.address_in_out.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Is permanent address same as present address? * </b>
+                    <input type="radio" class="address_same_yes" ng-model="data.address_details.address_same" name="address_same"
+                        value="yes" required>Yes
+                    <input type="radio" class="address_same_no" ng-model="data.address_details.address_same" name="address_same"
+                        value="no" required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.address_same.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+
+                <div class="Each_head">
+                    <h6><b>Emergency Contact Details *</b></h6>
+                </div>
+                <div>
+                    <b>Name and Address *</b>
+                    <input class="address" name="emergency_address" type="text" ng-model="data.address_details.address"
+                        required>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.emergency_address.$invalid">
+                        <span ng-show="myForm.emergency_address.$error.required">please Enter the address</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Mobile Number</b>
+                    <input class="mobile_number" type="text" ng-model="data.address_details.mobile_number">
+                    <b class="telephone_number">Telephone Number</b>
+                    <input class="telephone_number" type="text" ng-model="data.address_details.telephone_number">
+                </div>
+                <div>
+                    <b>Email</b>
+                    <input class="email" name="email" type="email" ng-pattern="emailFormat" ng-model="data.address_details.email">
+                    <span style="color:red" class="error" ng-show="myForm.email.$error.pattern">
+                        Not valid email!
+                    </span>
+                </div>
+
+
+                <div class="Each_head">
+                    <h6><b>References in your Village or Town or City</b></h6>
+                </div>
+                <div>
+                    <b>First Reference Name and Address *</b>
+                    <input class="first_refer_address" name="first_ref_address" type="text" ng-model="data.address_details.first_refer_address"
+                        required>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.first_ref_address.$invalid">
+                        <span ng-show="myForm.first_ref_address.$error.required">please enter the address</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Mobile Number</b>
+                    <input class="first_refer_mobile_number" type="text" ng-model="data.address_details.first_refer_mobile_number">
+                    <b class="first_refer_telephone_number">Telephone Number</b>
+                    <input class="first_refer_telephone_number" type="text" ng-model="data.address_details.first_refer_telephone_number">
+                </div>
+
+                <div>
+                    <b>Second Reference Name and Address *</b>
+                    <input class="second_refer_address" name="second_ref_address" type="text" ng-model="data.address_details.second_refer_address"
+                        required>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.second_ref_address.$invalid">
+                        <span ng-show="myForm.second_ref_address.$error.required">please enter the address</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>Mobile Number</b>
+                    <input class="second_refer_mobile_number" type="text" ng-model="data.address_details.second_refer_mobile_number">
+                    <b class="second_refer_telephone_number">Telephone Number</b>
+                    <input class="second_refer_telephone_number" type="text" ng-model="data.address_details.second_refer_telephone_number">
+                </div>
+
+                <div class="Each_head">
+                    <h6><b>Previous Passport/ Application Details</b></h6>
+                </div>
+                <p><b>Have you held/ hold any diplomatic/ official passport? </b></p>
+                <div>
+                    <b>Passport Number</b>
+                    <input class="passport_num" type="text" ng-model="data.other_details.passport_num">
+                    <b class="doi_head">Date of Issue(DD/MM/YYYY)</b>
+                    <input class="doi" type="date" ng-model="data.other_details.date_of_issue">
+                </div>
+                <div>
+                    <b>Date of Expiry (DD/MM/YYYY)</b>
+                    <input class="doe" type="date" ng-model="data.other_details.date_of_expire">
+                </div>
+                <div>
+                    <b>Place of Issue </b>
+                    <input class="poi" type="text" ng-model="data.other_details.place_of_issue">
+                </div>
+                <div>
+                    <b>Have you ever applied for passport, but not issued? *</b>
+                    <input type="radio" class="passport_issue_yes" ng-model="data.other_details.passport_issue" name="passportIssue"
+                        value="yes" required>Yes
+                    <input type="radio" class="passport_issue_no" ng-model="data.other_details.passport_issue" name="passportIssue"
+                        value="no" required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.passportIssue.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+
+
+
+                <div class="Each_head">
+                    <h6><b>Other Details</b></h6>
+                </div>
+                <div>
+                    <b>1) Have you ever been charged with criminal proceedings or any arrest warrant/ summon pending
+                        before a court of India? *</b>
+                    <input type="radio" class="charged_yes" ng-model="data.other_details.charged" name="charged" value="yes"
+                        required>Yes
+                    <input type="radio" class="charged_no" ng-model="data.other_details.charged" name="charged" value="no"
+                        required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.charged.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b class="offence_head">2) Have you at any time during the period of 5 years immediately preceding
+                        the date of this application
+                        been convicted by a court in India for any criminal offence and sentenced to imprisonment for
+                        two
+                        years or more? *</b>
+                    <input type="radio" class="offence_yes" ng-model="data.other_details.offence" name="offence" value="yes"
+                        required>Yes
+                    <input type="radio" class="offence_no" ng-model="data.other_details.offence" name="offence" value="no"
+                        required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.offence.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>3) Have you ever been refused or denied passport? *</b>
+                    <input type="radio" class="denied_yes" ng-model="data.other_details.denied" name="denied" value="yes"
+                        required>Yes
+                    <input type="radio" class="denied_no" ng-model="data.other_details.denied" name="denied" value="no"
+                        required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.denied.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>4) Has your Passport ever been impounded or Revoked? *</b>
+                    <input type="radio" class="revoked_yes" ng-model="data.other_details.revoked" name="revoked" value="yes"
+                        required>Yes
+                    <input type="radio" class="revoked_no" ng-model="data.other_details.revoked" name="revoked" value="no"
+                        required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.revoked.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>5) Have you ever applied for/ been granted political asylum to/ by any foreign country? *</b>
+                    <input type="radio" class="political_asylum_yes" ng-model="data.other_details.political_asylum" name="political_asylum"
+                        value="yes" required>Yes
+                    <input type="radio" class="political_asylum_no" ng-model="data.other_details.political_asylum" name="political_asylum"
+                        value="no" required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.political_asylum.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+                <div>
+                    <b>6) Have you ever returned to India on Emergency Certificate (EC) or were ever deported or
+                        repatriated? *</b>
+                    <input type="radio" class="ec_yes" ng-model="data.other_details.emergency_certificate" name="emergency_certificate" value="yes" required>Yes
+                    <input type="radio" class="ec_no" ng-model="data.other_details.emergency_certificate" name="emergency_certificate" value="no" required>No
+                    <span style="color:red" ng-show="myForm.$submitted">
+                        <span ng-show="myForm.emergency_certificate.$error.required">please select this field</span><br>
+                    </span>
+                </div>
+                <div class="self_declaration">
+                    <b>Self Declaration</b>
+                    <p class="policies"> I owe allegiance to the sovereignty , unity & integrity of India, and have not
+                        voluntarily acquired citizenship or travel document of any
+                        other country. I have not lost, surrendered or been deprived of the the citizenship of India
+                        and I affirm that the information given by me in
+                        this form and the enclosures is true and I solely responsible for its accuracy, and I am liable
+                        to be penalized or prosecuted if found
+                        otherwise. I am aware that under the Passport Act, 1967 it is a criminal offence to furnish any
+                        false information or to suppress any material
+                        information with a view to obtaining passport or travel document.</p>
+                    <input class="agree" type="checkbox" ng-model="data.other_details.accept"> I Agree<br>
+
+                </div>
+                <div>
+                    <b>Place *</b>
+                    <input class="place" type="text" name="place" ng-model="data.other_details.place" required>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.place.$invalid">
+                        <span ng-show="myForm.place.$error.required">Please Enter the place</span><br>
+                    </span>
+                    <b>Date (DD/MM/YYYY) *</b>
+                    <input class="date" type="date" name="date" ng-model="data.other_details.date" required>
+                    <span style="color:red" ng-show="myForm.$submitted && myForm.date.$invalid">
+                        <span ng-show="myForm.date.$error.required">Please Enter the date</span><br>
+                    </span>
+                </div>
+
+                <button ng-if="!data._id" type="submit" class="btn btn-success">Submit</button>
+                <button ng-if="data._id" class="btn btn-success">Update</button>
+                <form>
+            </div>
+            </body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="lib/jquery.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="appController.js"></script>
+    <link rel="stylesheet" href="stylesheets/view_form.css">
+
+</head>
+
+<div ng-app="app">
+    <div ng-controller="viewController" class="container">
+        <h2>Details</h2>
+        <table>
+            <thead>
+                <!-- <th>ID</th> -->
+                <th>Applicant Name </th>
+                <th>Created Date </td>
+                <th>Created Time </td>
+                <th>Last Updated Date</td>
+                <th>Last Updated time</td>
+                <th>Show Data</th>
+                <th>Delete Data</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="applicant_detail in data">
+                    <!-- <td>{{applicant_detail._id}}</td> -->
+                    <td>{{applicant_detail.applicant_details.first_name}}</td>
+                    <td>{{applicant_detail.createdAt.substring(0,10)}}</td>
+                    <td>{{applicant_detail.createdAt.substring(11,20)}}</td>
+                    <td>{{applicant_detail.updatedAt.substring(0,10)}}</td>
+                    <td>{{applicant_detail.updatedAt.substring(11,20)}}</td>
+                    <td><button class="btn btn-success" ng-click="showHandle(applicant_detail._id)" ng-model="show">Show</button></td>
+                    <td><button class="btn btn-danger" ng-model="delete" ng-click="deleteHandle(applicant_detail._id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table><br>
+        <a href="/"><button class="btn btn-primary">Back</button></a>
+    </div>
+</div>
+
+</html>
